@@ -4811,6 +4811,34 @@ render();
   }
 
   // ---------- attach a range slider that mirrors a number input ----------
+  // Insert companion controls (slider, chips) as a sibling of the input's
+  // topmost wrapper inside `.field`, right after that wrapper. This keeps
+  // them aligned to the input row and above any auto-generated extras
+  // (e.g. #holdBreakdown, #sqftEquiv).
+  function insertInField(inp, node) {
+    const field = inp.closest(".field");
+    if (!field) {
+      inp.parentNode.appendChild(node);
+      return;
+    }
+    let row = inp;
+    while (row.parentNode && row.parentNode !== field) row = row.parentNode;
+    // Skip past any range-rows / chips-rows already inserted so order matches
+    // call order (slider first, chips below it).
+    let ref = row;
+    while (
+      ref.nextSibling &&
+      ref.nextSibling.classList &&
+      (ref.nextSibling.classList.contains("range-row") ||
+       ref.nextSibling.classList.contains("chips-row"))
+    ) {
+      ref = ref.nextSibling;
+    }
+    field.insertBefore(node, ref.nextSibling);
+  }
+  function fieldHost(inp) {
+    return inp.closest(".field") || inp.parentNode;
+  }
   function attachSlider(inputId, opts) {
     const inp = document.getElementById(inputId);
     if (!inp) return;
@@ -4823,7 +4851,7 @@ render();
     wrap.innerHTML = ''
       + '<input type="range" min="' + min + '" max="' + max + '" step="' + step + '" value="' + inp.value + '" data-target="' + inputId + '">'
       + '<span class="range-val">' + fmtVal(inp.value, suffix) + '</span>';
-    inp.parentNode.insertBefore(wrap, inp.nextSibling);
+    insertInField(inp, wrap);
     const slider = wrap.querySelector("input[type=range]");
     const out    = wrap.querySelector(".range-val");
     setRangeFill(slider);
@@ -4853,7 +4881,7 @@ render();
     wrap.innerHTML = values.map(function(v) {
       return '<button type="button" class="chip" data-val="' + v + '">' + v + (opts.suffix || "") + '</button>';
     }).join("");
-    inp.parentNode.appendChild(wrap);
+    insertInField(inp, wrap);
     wrap.querySelectorAll(".chip").forEach(function(c) {
       c.addEventListener("click", function() {
         inp.value = c.dataset.val;
