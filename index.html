@@ -1739,6 +1739,239 @@
     box-shadow: 0 2px 8px rgba(217,119,87,0.32), var(--inset-hl);
   }
 
+  /* Layout selector control in title bar */
+  .layout-selector {
+    padding: 8px 12px;
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    font-size: 12px; font-weight: 700;
+    background: rgba(255,255,255,0.7);
+    color: var(--text);
+    cursor: pointer;
+    font-family: inherit;
+    letter-spacing: 0.3px;
+    box-shadow: var(--inset-hl);
+    transition: all 0.18s ease;
+  }
+  .layout-selector:hover {
+    background: #fff; border-color: var(--text);
+  }
+
+  /* =====================================================
+     LAYOUT VARIANTS — toggled via body[data-layout="..."]
+     ===================================================== */
+
+  /* ---------- COCKPIT: results on top, inputs in 3-col grid below ---------- */
+  body[data-layout="cockpit"] .simulator-container {
+    display: block;
+  }
+  body[data-layout="cockpit"] .output-panel {
+    margin-bottom: 28px;
+  }
+  body[data-layout="cockpit"] .input-panel {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    align-items: start;
+  }
+  body[data-layout="cockpit"] .input-panel .sim-card {
+    margin-bottom: 0;
+  }
+  body[data-layout="cockpit"] .input-panel .profile-card {
+    grid-column: 1 / -1;
+  }
+  body[data-layout="cockpit"] .input-panel .calc-card {
+    grid-column: span 1;
+  }
+  @media (max-width: 1100px) {
+    body[data-layout="cockpit"] .input-panel { grid-template-columns: repeat(2, 1fr); }
+    body[data-layout="cockpit"] .input-panel .profile-card { grid-column: 1 / -1; }
+  }
+  @media (max-width: 700px) {
+    body[data-layout="cockpit"] .input-panel { grid-template-columns: 1fr; }
+  }
+  /* Cockpit: condense the output-panel — KPIs on top, charts/tables stay full width */
+  body[data-layout="cockpit"] .output-panel > .currency-bar {
+    margin-bottom: 14px;
+  }
+  body[data-layout="cockpit"] .output-panel > .kpi-grid {
+    margin-bottom: 18px;
+  }
+
+  /* ---------- BENTO: huge IRR tile + satellite KPIs ---------- */
+  body[data-layout="bento"] .simulator-container {
+    grid-template-columns: 320px 1fr;
+  }
+  body[data-layout="bento"] .input-panel .sim-card {
+    padding: 18px;
+  }
+  body[data-layout="bento"] .input-panel .sim-card h3 {
+    font-size: 11.5px;
+    margin-bottom: 12px;
+  }
+  body[data-layout="bento"] .kpi-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 14px;
+    min-height: 320px;
+  }
+  body[data-layout="bento"] .kpi.accent {
+    grid-row: span 2;
+    padding: 32px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  body[data-layout="bento"] .kpi.accent .kpi-label {
+    font-size: 12px; letter-spacing: 2px;
+  }
+  body[data-layout="bento"] .kpi.accent .kpi-value {
+    font-size: 64px;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin-top: auto;
+  }
+  body[data-layout="bento"] .kpi.accent .kpi-sub {
+    font-size: 13px; margin-top: 8px;
+  }
+  body[data-layout="bento"] .kpi.accent::before {
+    width: 220px; height: 220px;
+    transform: translate(35%, -35%);
+    opacity: 0.35;
+  }
+  body[data-layout="bento"] .kpi:not(.accent) {
+    padding: 18px;
+  }
+  body[data-layout="bento"] .kpi:not(.accent) .kpi-value {
+    font-size: 22px;
+  }
+  /* In bento, scenarios become a tighter row */
+  body[data-layout="bento"] .scenario-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  @media (max-width: 1100px) {
+    body[data-layout="bento"] .simulator-container { grid-template-columns: 1fr; }
+    body[data-layout="bento"] .kpi-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto auto;
+      min-height: 0;
+    }
+    body[data-layout="bento"] .kpi.accent {
+      grid-column: span 2;
+      grid-row: span 1;
+    }
+    body[data-layout="bento"] .kpi.accent .kpi-value { font-size: 48px; }
+  }
+
+  /* ---------- EDITORIAL: hero IRR centered, single-column report ---------- */
+  body[data-layout="editorial"] .simulator-container {
+    display: block;
+  }
+  body[data-layout="editorial"] .input-panel {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 36px;
+  }
+  body[data-layout="editorial"] .input-panel .sim-card {
+    margin-bottom: 0;
+    padding: 16px;
+  }
+  body[data-layout="editorial"] .input-panel .sim-card h3 {
+    font-size: 11px;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    letter-spacing: 1.4px;
+  }
+  body[data-layout="editorial"] .input-panel .profile-card {
+    grid-column: 1 / -1;
+  }
+  body[data-layout="editorial"] .input-panel .calc-card {
+    display: none;
+  }
+  /* Editorial KPI hero */
+  body[data-layout="editorial"] .kpi-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin: 0 auto 28px;
+    max-width: 100%;
+  }
+  body[data-layout="editorial"] .kpi.accent {
+    text-align: center;
+    padding: 60px 40px 50px;
+    border-radius: var(--r-lg);
+    order: -1;
+  }
+  body[data-layout="editorial"] .kpi.accent .kpi-label {
+    font-size: 13px; letter-spacing: 3px;
+    margin-bottom: 18px;
+  }
+  body[data-layout="editorial"] .kpi.accent .kpi-value {
+    font-size: 96px;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    font-weight: 700;
+  }
+  body[data-layout="editorial"] .kpi.accent .kpi-sub {
+    font-size: 14px;
+    margin-top: 14px;
+    opacity: 0.9;
+  }
+  body[data-layout="editorial"] .kpi.accent::before {
+    width: 280px; height: 280px;
+    transform: translate(-50%, -50%);
+    top: 50%; left: 50%;
+    opacity: 0.25;
+  }
+  /* satellite KPIs become a tight strip below the hero */
+  body[data-layout="editorial"] .kpi-grid::after {
+    content: "";
+    display: block;
+  }
+  body[data-layout="editorial"] .kpi:not(.accent) {
+    display: inline-block;
+    background: rgba(255,255,255,0.6);
+    border-radius: var(--r-sm);
+  }
+  /* Wrap satellites in a single row using grid */
+  body[data-layout="editorial"] .kpi-grid {
+    grid-template-columns: 1fr;
+  }
+  body[data-layout="editorial"] .output-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  /* group the 3 non-accent KPIs into a horizontal row */
+  body[data-layout="editorial"] .kpi-grid {
+    grid-template-areas:
+      "hero hero hero"
+      "k1   k2   k3";
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  body[data-layout="editorial"] .kpi.accent { grid-area: hero; }
+  body[data-layout="editorial"] .kpi:not(.accent):nth-child(1) { grid-area: k1; }
+  body[data-layout="editorial"] .kpi:not(.accent):nth-child(2) { grid-area: k2; }
+  body[data-layout="editorial"] .kpi:not(.accent):nth-child(3) { grid-area: k3; }
+  body[data-layout="editorial"] .kpi:not(.accent):nth-child(4) { display: none; }
+
+  @media (max-width: 1100px) {
+    body[data-layout="editorial"] .input-panel { grid-template-columns: repeat(2, 1fr); }
+    body[data-layout="editorial"] .kpi.accent .kpi-value { font-size: 72px; }
+  }
+  @media (max-width: 700px) {
+    body[data-layout="editorial"] .input-panel { grid-template-columns: 1fr; }
+    body[data-layout="editorial"] .kpi-grid {
+      grid-template-areas: "hero" "k1" "k2" "k3";
+      grid-template-columns: 1fr;
+    }
+    body[data-layout="editorial"] .kpi.accent { padding: 40px 24px; }
+    body[data-layout="editorial"] .kpi.accent .kpi-value { font-size: 56px; }
+  }
+
   /* Live IRR pulse when value changes */
   .kpi.accent.flash {
     animation: irrFlash 0.6s ease-out;
@@ -1815,7 +2048,13 @@
           <span class="en">Select property → adjust loan / holding / currency → instant IRR + net proceeds</span>
         </div>
       </div>
-      <div style="display:flex; gap:8px; align-items:center;">
+      <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+        <select id="layoutSelector" class="layout-selector" title="Layout">
+          <option value="classic">▤ Classic — sidebar + results</option>
+          <option value="cockpit">▤ Cockpit — results on top</option>
+          <option value="bento">◫ Bento — big IRR + satellites</option>
+          <option value="editorial">▦ Editorial — hero IRR centered</option>
+        </select>
         <select id="versionSelector" onchange="navigateVersion(this.value)" style="padding:8px 12px; border:1px solid var(--border); border-radius:6px; font-size:13px; font-weight:600; background:#fff; color:var(--primary); cursor:pointer;">
           <option value="v0">V0 — 現行版 / Current</option>
           <option value="v1">V1 — オプションA: 運用年のみ</option>
@@ -4772,6 +5011,22 @@ render();
       return r;
     };
   }
+
+  // ---------- LAYOUT SWITCHER (Classic / Cockpit / Bento / Editorial) ----------
+  (function() {
+    const sel = document.getElementById("layoutSelector");
+    if (!sel) return;
+    const KEY = "exceedV2Layout";
+    function apply(name) {
+      document.body.setAttribute("data-layout", name);
+      try { localStorage.setItem(KEY, name); } catch(_) {}
+    }
+    let saved = "classic";
+    try { saved = localStorage.getItem(KEY) || "classic"; } catch(_) {}
+    sel.value = saved;
+    apply(saved);
+    sel.addEventListener("change", function() { apply(sel.value); });
+  })();
 
   // ---------- LIVE IRR FLASH ----------
   (function() {
