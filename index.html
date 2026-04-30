@@ -1585,6 +1585,170 @@
     .scenario-grid, .kpi-grid { gap: 10px; }
   }
 
+  /* ============ V2 INNOVATIONS ============ */
+  /* Investor Profile rail (1-5) */
+  .profile-card { background: linear-gradient(135deg, rgba(255,255,255,0.65) 0%, rgba(255,255,255,0.35) 100%), linear-gradient(135deg, rgba(217,119,87,0.10) 0%, rgba(255,206,148,0.10) 100%); }
+  .profile-rail {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px;
+    margin: 4px 0 8px;
+  }
+  .profile-step {
+    padding: 12px 4px;
+    border: 1px solid var(--border-strong);
+    background: rgba(255,255,255,0.6);
+    border-radius: var(--r-sm);
+    cursor: pointer;
+    text-align: center;
+    color: var(--text-muted);
+    transition: all 0.18s ease;
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    font-family: inherit;
+    box-shadow: var(--inset-hl);
+  }
+  .profile-step .pn {
+    font-size: 17px; font-weight: 800;
+    color: var(--accent-dark);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .profile-step .pl {
+    font-size: 9.5px; letter-spacing: 0.6px;
+    text-transform: uppercase; font-weight: 700;
+  }
+  .profile-step:hover {
+    background: rgba(255,255,255,0.92);
+    border-color: var(--text); color: var(--text);
+    transform: translateY(-1px);
+  }
+  .profile-step.active {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+    color: #fff; border-color: transparent;
+    box-shadow: 0 6px 18px rgba(217,119,87,0.40), var(--inset-hl);
+    transform: translateY(-1px);
+  }
+  .profile-step.active .pn { color: #fff; }
+  .profile-step.active .pl { color: rgba(255,255,255,0.95); }
+  .profile-hint {
+    display: block; margin-top: 6px;
+    font-size: 11px; color: var(--text-muted); line-height: 1.5;
+  }
+
+  /* Range slider companion to a number input */
+  .range-row {
+    display: flex; align-items: center; gap: 12px;
+    margin-top: 8px;
+  }
+  .range-row input[type="range"] {
+    flex: 1; -webkit-appearance: none; appearance: none;
+    height: 6px; border-radius: 999px; outline: none;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--accent) var(--pct, 50%), rgba(42,31,26,0.10) var(--pct, 50%), rgba(42,31,26,0.10) 100%);
+    box-shadow: var(--inset-hl);
+  }
+  .range-row input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 20px; height: 20px; border-radius: 50%;
+    background: linear-gradient(135deg, #fff 0%, #fbeae0 100%);
+    border: 1.5px solid var(--accent);
+    box-shadow: 0 2px 8px rgba(217,119,87,0.45), inset 0 1px 0 #fff;
+    cursor: pointer;
+    transition: transform 0.14s ease;
+  }
+  .range-row input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.12); }
+  .range-row input[type="range"]:active::-webkit-slider-thumb { transform: scale(1.18); }
+  .range-row input[type="range"]::-moz-range-thumb {
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 1.5px solid var(--accent);
+    background: linear-gradient(135deg, #fff 0%, #fbeae0 100%);
+    cursor: pointer;
+  }
+  .range-row .range-val {
+    min-width: 56px; text-align: right;
+    font-variant-numeric: tabular-nums;
+    font-weight: 700; color: var(--text);
+    font-size: 13px;
+    background: rgba(255,255,255,0.7);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 3px 10px;
+    box-shadow: var(--inset-hl);
+  }
+
+  /* Quick-value chips */
+  .chips-row {
+    display: flex; gap: 6px; flex-wrap: wrap;
+    margin-top: 8px;
+  }
+  .chip {
+    padding: 5px 13px;
+    background: rgba(255,255,255,0.6);
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    font-size: 11px; font-weight: 700;
+    color: var(--text-muted); cursor: pointer;
+    font-family: inherit; letter-spacing: 0.3px;
+    transition: all 0.16s ease;
+    box-shadow: var(--inset-hl);
+  }
+  .chip:hover {
+    background: #fff; color: var(--text);
+    border-color: var(--text);
+    transform: translateY(-1px);
+  }
+  .chip.active {
+    background: linear-gradient(135deg, var(--text) 0%, var(--primary-light) 100%);
+    color: #fff; border-color: transparent;
+    box-shadow: 0 3px 10px rgba(42,31,26,0.20), var(--inset-hl);
+  }
+
+  /* Quick property chips strip below the preset dropdown */
+  .preset-chips {
+    display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px;
+  }
+  .preset-chips .chip {
+    padding: 5px 11px; font-size: 10.5px;
+    letter-spacing: 0.2px;
+  }
+  .preset-chips .chip.active {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+  }
+
+  /* Visual segmented chips for Type / Mode replacements (alongside selects) */
+  .seg-chips {
+    display: flex; gap: 4px; margin-top: 4px;
+    background: rgba(255,255,255,0.55);
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    padding: 3px;
+    box-shadow: var(--inset-hl);
+  }
+  .seg-chips button {
+    flex: 1;
+    background: transparent; border: none;
+    padding: 6px 8px;
+    font-size: 11px; font-weight: 700;
+    color: var(--text-muted);
+    border-radius: 999px;
+    cursor: pointer; font-family: inherit;
+    letter-spacing: 0.3px;
+    transition: all 0.16s ease;
+  }
+  .seg-chips button:hover { color: var(--text); }
+  .seg-chips button.active {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(217,119,87,0.32), var(--inset-hl);
+  }
+
+  /* Live IRR pulse when value changes */
+  .kpi.accent.flash {
+    animation: irrFlash 0.6s ease-out;
+  }
+  @keyframes irrFlash {
+    0% { box-shadow: 0 0 0 0 rgba(217,119,87,0.0), 0 8px 24px rgba(217,119,87,0.32), inset 0 1px 0 rgba(255,255,255,0.5); }
+    50% { box-shadow: 0 0 0 8px rgba(217,119,87,0.30), 0 14px 32px rgba(217,119,87,0.48), inset 0 1px 0 rgba(255,255,255,0.6); }
+    100% { box-shadow: 0 0 0 0 rgba(217,119,87,0.0), 0 8px 24px rgba(217,119,87,0.32), inset 0 1px 0 rgba(255,255,255,0.5); }
+  }
+
 </style>
 </head>
 <body data-lang="ja">
@@ -1672,6 +1836,37 @@
     <div class="simulator-container">
       <!-- INPUTS -->
       <div class="input-panel">
+        <!-- INVESTOR PROFILE (V2) -->
+        <div class="sim-card profile-card">
+          <h3><span class="count">★</span><span class="ja">投資プロファイル</span><span class="en">Investor Profile</span></h3>
+          <div class="profile-rail" id="profileRail">
+            <button type="button" class="profile-step" data-profile="0">
+              <span class="pn">1</span>
+              <span class="pl"><span class="ja">保守的</span><span class="en">Safe</span></span>
+            </button>
+            <button type="button" class="profile-step" data-profile="1">
+              <span class="pn">2</span>
+              <span class="pl"><span class="ja">慎重</span><span class="en">Cautious</span></span>
+            </button>
+            <button type="button" class="profile-step active" data-profile="2">
+              <span class="pn">3</span>
+              <span class="pl"><span class="ja">バランス</span><span class="en">Balanced</span></span>
+            </button>
+            <button type="button" class="profile-step" data-profile="3">
+              <span class="pn">4</span>
+              <span class="pl"><span class="ja">積極的</span><span class="en">Bold</span></span>
+            </button>
+            <button type="button" class="profile-step" data-profile="4">
+              <span class="pn">5</span>
+              <span class="pl"><span class="ja">最大</span><span class="en">Max</span></span>
+            </button>
+          </div>
+          <small class="profile-hint" id="profileHint">
+            <span class="ja">選択するとレバレッジ・金利・上昇率を一括調整します。</span>
+            <span class="en">Sets LTV, rate, and appreciation in one click.</span>
+          </small>
+        </div>
+
         <div class="sim-card">
           <h3><span class="count">1</span><span class="ja">物件情報</span><span class="en">Property</span></h3>
           <div class="field">
@@ -4349,6 +4544,254 @@ window.addEventListener("scroll", updateActiveNav);
 
 if (typeof syncReadyMode === "function") syncReadyMode();
 render();
+</script>
+
+<!-- ============ V2 INNOVATIONS: sliders, chips, profile rail ============ -->
+<script>
+(function() {
+  "use strict";
+
+  // ---------- helpers ----------
+  function fire(el) {
+    el.dispatchEvent(new Event("input",  { bubbles: true }));
+    el.dispatchEvent(new Event("change", { bubbles: true }));
+  }
+  function fmtVal(v, suffix) {
+    const n = Number(v);
+    if (Number.isFinite(n) && (suffix === "%" || suffix === " yrs" || suffix === " mo")) {
+      return (Math.round(n * 100) / 100) + suffix;
+    }
+    return v + (suffix || "");
+  }
+  function setRangeFill(slider) {
+    const min = Number(slider.min) || 0;
+    const max = Number(slider.max) || 100;
+    const val = Number(slider.value);
+    const pct = ((val - min) / (max - min)) * 100;
+    slider.style.setProperty("--pct", pct + "%");
+  }
+
+  // ---------- attach a range slider that mirrors a number input ----------
+  function attachSlider(inputId, opts) {
+    const inp = document.getElementById(inputId);
+    if (!inp) return;
+    const min  = opts.min  != null ? opts.min  : (inp.min  || 0);
+    const max  = opts.max  != null ? opts.max  : (inp.max  || 100);
+    const step = opts.step != null ? opts.step : (inp.step || 1);
+    const suffix = opts.suffix || "";
+    const wrap = document.createElement("div");
+    wrap.className = "range-row";
+    wrap.innerHTML = ''
+      + '<input type="range" min="' + min + '" max="' + max + '" step="' + step + '" value="' + inp.value + '" data-target="' + inputId + '">'
+      + '<span class="range-val">' + fmtVal(inp.value, suffix) + '</span>';
+    inp.parentNode.insertBefore(wrap, inp.nextSibling);
+    const slider = wrap.querySelector("input[type=range]");
+    const out    = wrap.querySelector(".range-val");
+    setRangeFill(slider);
+    slider.addEventListener("input", function() {
+      inp.value = slider.value;
+      out.textContent = fmtVal(slider.value, suffix);
+      setRangeFill(slider);
+      fire(inp);
+    });
+    inp.addEventListener("input", function() {
+      if (String(slider.value) !== String(inp.value)) {
+        slider.value = inp.value;
+        setRangeFill(slider);
+      }
+      out.textContent = fmtVal(inp.value, suffix);
+    });
+    return wrap;
+  }
+
+  // ---------- attach a row of preset-value chips that target a number input ----------
+  function attachChips(inputId, values, opts) {
+    const inp = document.getElementById(inputId);
+    if (!inp) return;
+    opts = opts || {};
+    const wrap = document.createElement("div");
+    wrap.className = "chips-row";
+    wrap.innerHTML = values.map(function(v) {
+      return '<button type="button" class="chip" data-val="' + v + '">' + v + (opts.suffix || "") + '</button>';
+    }).join("");
+    inp.parentNode.appendChild(wrap);
+    wrap.querySelectorAll(".chip").forEach(function(c) {
+      c.addEventListener("click", function() {
+        inp.value = c.dataset.val;
+        fire(inp);
+        sync();
+      });
+    });
+    function sync() {
+      wrap.querySelectorAll(".chip").forEach(function(c) {
+        c.classList.toggle("active", String(c.dataset.val) === String(inp.value));
+      });
+    }
+    inp.addEventListener("input", sync);
+    sync();
+    return wrap;
+  }
+
+  // ---------- segmented chip group for a <select> (visual replacement) ----------
+  function segChipsForSelect(selectId, options) {
+    const sel = document.getElementById(selectId);
+    if (!sel) return;
+    const wrap = document.createElement("div");
+    wrap.className = "seg-chips";
+    wrap.innerHTML = options.map(function(o) {
+      return '<button type="button" data-val="' + o.value + '">'
+        + '<span class="ja">' + o.ja + '</span>'
+        + '<span class="en">' + o.en + '</span>'
+        + '</button>';
+    }).join("");
+    sel.style.display = "none";
+    sel.parentNode.appendChild(wrap);
+    wrap.querySelectorAll("button").forEach(function(btn) {
+      btn.addEventListener("click", function() {
+        sel.value = btn.dataset.val;
+        fire(sel);
+        sync();
+      });
+    });
+    function sync() {
+      wrap.querySelectorAll("button").forEach(function(btn) {
+        btn.classList.toggle("active", btn.dataset.val === sel.value);
+      });
+    }
+    sel.addEventListener("change", sync);
+    sync();
+  }
+
+  // ---------- INVESTOR PROFILE 1-5 ----------
+  const PROFILES = [
+    { ltv: 0,  rate: 6.0, appr: 4 },   // 1 Safe
+    { ltv: 25, rate: 6.0, appr: 5 },   // 2 Cautious
+    { ltv: 50, rate: 6.0, appr: 7 },   // 3 Balanced (default)
+    { ltv: 65, rate: 6.0, appr: 9 },   // 4 Bold
+    { ltv: 75, rate: 6.0, appr: 11 }   // 5 Max
+  ];
+  function applyProfile(idx) {
+    const p = PROFILES[idx];
+    if (!p) return;
+    const ltv = document.getElementById("ltv");
+    const rate = document.getElementById("mortgageRate");
+    const appr = document.getElementById("appreciation");
+    const useM = document.getElementById("useMortgage");
+    if (useM) {
+      useM.checked = (p.ltv > 0);
+      fire(useM);
+    }
+    if (ltv)  { ltv.value  = p.ltv;  fire(ltv);  }
+    if (rate) { rate.value = p.rate; fire(rate); }
+    if (appr) { appr.value = p.appr; fire(appr); }
+    document.querySelectorAll(".profile-step").forEach(function(el, i) {
+      el.classList.toggle("active", i === idx);
+    });
+  }
+  document.querySelectorAll(".profile-step").forEach(function(el) {
+    el.addEventListener("click", function() {
+      applyProfile(parseInt(el.dataset.profile, 10));
+    });
+  });
+
+  // ---------- ATTACH SLIDERS ----------
+  attachSlider("ltv",          { min: 0,  max: 80, step: 5,   suffix: "%" });
+  attachSlider("mortgageRate", { min: 2,  max: 10, step: 0.1, suffix: "%" });
+  attachSlider("mortgageTerm", { min: 5,  max: 25, step: 1,   suffix: " yrs" });
+  attachSlider("grossYield",   { min: 0,  max: 15, step: 0.1, suffix: "%" });
+  attachSlider("appreciation", { min: -5, max: 20, step: 0.5, suffix: "%" });
+  attachSlider("holdYears",    { min: 0,  max: 20, step: 1,   suffix: " yrs" });
+  attachSlider("vacancy",      { min: 0,  max: 50, step: 1,   suffix: "%" });
+
+  // ---------- ATTACH QUICK CHIPS ----------
+  attachChips("ltv",       [0, 25, 50, 65, 75], { suffix: "%" });
+  attachChips("holdYears", [3, 5, 7, 10, 15],   { suffix: "y" });
+
+  // ---------- VISUAL CHIPS FOR PROPERTY TYPE & PURCHASE MODE ----------
+  segChipsForSelect("propertyType", [
+    { value: "standard", ja: "標準",       en: "Standard" },
+    { value: "branded",  ja: "ブランド",   en: "Branded"  },
+    { value: "villa",    ja: "ヴィラ",     en: "Villa"    }
+  ]);
+  segChipsForSelect("purchaseMode", [
+    { value: "offplan",   ja: "オフプラン", en: "Off-plan"   },
+    { value: "ready",     ja: "完成済み",   en: "Ready"      },
+    { value: "secondary", ja: "中古",       en: "Secondary"  }
+  ]);
+
+  // ---------- QUICK PROPERTY CHIPS (top picks) ----------
+  (function() {
+    const presetSel = document.getElementById("preset");
+    if (!presetSel) return;
+    const TOP = [
+      { v: "ritz",       label: "Ritz 13M" },
+      { v: "oneZaabeel", label: "Za'abeel 13.5M" },
+      { v: "serenia",    label: "Serenia 7M" },
+      { v: "orla",       label: "ORLA 31M" },
+      { v: "sixSenses4", label: "Six Senses 32M" }
+    ];
+    const wrap = document.createElement("div");
+    wrap.className = "preset-chips";
+    wrap.innerHTML = TOP.map(function(t) {
+      return '<button type="button" class="chip" data-val="' + t.v + '">' + t.label + '</button>';
+    }).join("");
+    presetSel.parentNode.appendChild(wrap);
+    function sync() {
+      wrap.querySelectorAll(".chip").forEach(function(c) {
+        c.classList.toggle("active", c.dataset.val === presetSel.value);
+      });
+    }
+    wrap.querySelectorAll(".chip").forEach(function(c) {
+      c.addEventListener("click", function() {
+        presetSel.value = c.dataset.val;
+        fire(presetSel);
+        sync();
+      });
+    });
+    presetSel.addEventListener("change", sync);
+    sync();
+  })();
+
+  // ---------- KEEP COMPANION CONTROLS IN SYNC AFTER PROGRAMMATIC CHANGES ----------
+  const SYNC_IDS = [
+    "ltv","mortgageRate","mortgageTerm","grossYield","appreciation",
+    "holdYears","holdMonths","vacancy","price","sqft","serviceChargePsf",
+    "furniture","propertyType","purchaseMode","completionYear","completionQuarter"
+  ];
+  function fireAll() {
+    SYNC_IDS.forEach(function(id) {
+      const el = document.getElementById(id);
+      if (el) el.dispatchEvent(new Event("input", { bubbles: true }));
+    });
+  }
+  if (typeof window.loadPreset === "function") {
+    const _orig = window.loadPreset;
+    window.loadPreset = function() {
+      const r = _orig.apply(this, arguments);
+      fireAll();
+      return r;
+    };
+  }
+
+  // ---------- LIVE IRR FLASH ----------
+  (function() {
+    const irr = document.getElementById("kpiIrr");
+    if (!irr) return;
+    const card = irr.closest(".kpi");
+    if (!card) return;
+    let last = irr.textContent;
+    const obs = new MutationObserver(function() {
+      if (irr.textContent !== last) {
+        last = irr.textContent;
+        card.classList.remove("flash");
+        void card.offsetWidth;
+        card.classList.add("flash");
+      }
+    });
+    obs.observe(irr, { childList: true, characterData: true, subtree: true });
+  })();
+
+})();
 </script>
 
 </body>
